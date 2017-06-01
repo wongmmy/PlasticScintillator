@@ -1,0 +1,63 @@
+#################################################################################
+# 									      	#
+# THIS TEST SHOWS THE DECAYS OF AS-74. 						#
+#   1) In Analogue MC mode	
+#   2) In Variance reduction mode. 						#
+# DAUGHTER NUCLEI ARE NOT DECAYED IN THE SIMULATION 
+# 										#
+# AS-74 HAS A RATHER COMPLICATED DECAY SCHEME WITH  CHANNELS:                
+#     BETA-, BETA+ AND EC
+#										#
+#                                                                              	#
+#################################################################################
+#
+
+
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/grdm/verbose 0
+#default sets whole volume to apply RD but i'm not generating any isotopes /grdm/noVolumes
+#used to select target that will be activated /grdm/selectVolume Target
+#
+#default /gps/pos/type is Point
+/gps/position 0 0 -13
+/gps/direction 0 0 1
+/gps/energy 662 keV
+/gps/particle gamma
+#
+#upper and lower limits on atomic mass and number, set to isotope number
+#/gps/energy 0 keV
+#/gps/particle ion
+#/grdm/nucleusLimits 137 137 55 55 
+#/gps/ion 55 137 0 0
+
+
+#
+#Next lines needed to have  atomic relaxation working 
+#
+/process/em/fluo true
+/process/em/auger true
+#turn on or off branching ratio biases, default is set all branches equal
+#/grdm/BRbias 0
+
+
+#/analysis/setFileName testAs74
+#/analysis/h1/set 1 100 0 1000 keV
+
+# 
+#  Analogue MC
+#/control/execute vis.mac
+/run/beamOn 1000000
+
+
+#  VR MC
+#/histo/fileName as74-b
+#/grdm/analogueMC 0
+#/run/beamOn 10
+
+
+
+
+
+
